@@ -6,10 +6,17 @@
 
 <AnchorPane prefHeight="547.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UngVienController">
    <children>
-      <TableView fx:id="tbl_UngVien" layoutX="130.0" layoutY="94.0" prefHeight="200.0" prefWidth="504.0">
+      <TableView fx:id="tbl_UngVien" layoutX="18.0" layoutY="94.0" prefHeight="200.0" prefWidth="766.0">
         <columns>
-          <TableColumn fx:id="col_maUngVien" prefWidth="69.60003662109375" text="C1" />
-          <TableColumn fx:id="col_hoten" prefWidth="80.79997253417969" text="C2" />
+          <TableColumn fx:id="col_maUngVien" prefWidth="90.4000244140625" text="C1" />
+          <TableColumn fx:id="col_hoten" prefWidth="60.79998779296875" text="C2" />
+            <TableColumn fx:id="col_ngaySinh" prefWidth="69.60003662109375" text="C1" />
+            <TableColumn fx:id="col_quequan" prefWidth="80.79997253417969" text="C2" />
+            <TableColumn fx:id="col_diachi" prefWidth="69.60003662109375" text="C1" />
+            <TableColumn fx:id="col_kinhNghiem" prefWidth="80.79997253417969" text="C2" />
+            <TableColumn fx:id="col_trinhDoChuyenMon" prefWidth="69.60003662109375" text="C1" />
+            <TableColumn fx:id="col_bangcap" prefWidth="80.79997253417969" text="C2" />
+            <TableColumn fx:id="col_luong" prefWidth="80.79997253417969" text="C2" />
         </columns>
       </TableView>
    </children>
