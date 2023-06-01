@@ -25,10 +25,10 @@ public class UngVienController implements Initializable {
     private TableView<UngVien> tbl_UngVien;
 
     @FXML
-    private TableColumn<UngVien, String> col_maUngVien;
+    private TableColumn<?, ?> col_maUngVien;
 
     @FXML
-    private TableColumn<UngVien, String> col_hoten;
+    private TableColumn<?, ?> col_hoten;
 
 
     @Override
@@ -53,6 +53,7 @@ public class UngVienController implements Initializable {
 
             col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
             col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+            tbl_UngVien.setItems(list);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
