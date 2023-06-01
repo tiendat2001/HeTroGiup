@@ -4,6 +4,8 @@ public class UngVien {
     public String maUngVien;
     public String hoTen;
 
+    public int namsinh;
+
     public UngVien(String maUngVien, String hoTen) {
         this.maUngVien = maUngVien;
         this.hoTen = hoTen;
@@ -33,6 +35,5 @@ public class UngVien {
         this.namsinh = namsinh;
     }
 
-    public int namsinh;
 
 }

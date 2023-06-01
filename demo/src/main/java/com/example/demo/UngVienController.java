@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,10 +25,11 @@ public class UngVienController implements Initializable {
     private TableView<UngVien> tbl_UngVien;
 
     @FXML
-    private TableColumn<?, ?> col_hoten;
+    private TableColumn<UngVien, String> col_maUngVien;
 
     @FXML
-    private TableColumn<?, ?> col_maUngVien;
+    private TableColumn<UngVien, String> col_hoten;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,13 +45,15 @@ public class UngVienController implements Initializable {
             ResultSet resultSet = Statement.executeQuery(sql);
             while (resultSet.next()) {
                 list.add(new UngVien(
-                        "dat","dattt")
-
-                );
+                        resultSet.getString("maUngVien"),
+                        resultSet.getString("hoTen")
+                ));
 
             }
-//            col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
-//            col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+
+            col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
+            col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
