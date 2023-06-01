@@ -23,12 +23,32 @@ public class UngVienController implements Initializable {
 
     @FXML
     private TableView<UngVien> tbl_UngVien;
+    @FXML
+    private TableColumn<?, ?> col_bangcap;
 
     @FXML
-    private TableColumn<UngVien, String> col_maUngVien;
+    private TableColumn<?, ?> col_diachi;
 
     @FXML
-    private TableColumn<UngVien, String> col_hoten;
+    private TableColumn<?, ?> col_hoten;
+
+    @FXML
+    private TableColumn<?, ?> col_kinhNghiem;
+
+    @FXML
+    private TableColumn<?, ?> col_luong;
+
+    @FXML
+    private TableColumn<?, ?> col_maUngVien;
+
+    @FXML
+    private TableColumn<?, ?> col_ngaySinh;
+
+    @FXML
+    private TableColumn<?, ?> col_quequan;
+
+    @FXML
+    private TableColumn<?, ?> col_trinhDoChuyenMon;
 
 
     @Override
@@ -46,13 +66,29 @@ public class UngVienController implements Initializable {
             while (resultSet.next()) {
                 list.add(new UngVien(
                         resultSet.getString("maUngVien"),
-                        resultSet.getString("hoTen")
+                        resultSet.getString("hoTen"),
+                        resultSet.getDate("ngaySinh"),
+                        resultSet.getString("queQuan"),
+                        resultSet.getString("diaChi"),
+                        resultSet.getString("kinhNghiem"),
+                        resultSet.getString("trinhDoChuyenMon"),
+                        resultSet.getString("bangCap"),
+                        resultSet.getFloat("luong")
+
                 ));
 
             }
 
             col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
             col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+            col_ngaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+            col_quequan.setCellValueFactory(new PropertyValueFactory<>("queQuan"));
+            col_diachi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+            col_kinhNghiem.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
+            col_trinhDoChuyenMon.setCellValueFactory(new PropertyValueFactory<>("trinhDoChuyenMon"));
+            col_bangcap.setCellValueFactory(new PropertyValueFactory<>("bangCap"));
+            col_luong.setCellValueFactory(new PropertyValueFactory<>("luong"));
+
             tbl_UngVien.setItems(list);
 
         } catch (SQLException throwables) {
