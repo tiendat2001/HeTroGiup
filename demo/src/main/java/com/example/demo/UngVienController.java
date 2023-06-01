@@ -25,10 +25,10 @@ public class UngVienController implements Initializable {
     private TableView<UngVien> tbl_UngVien;
 
     @FXML
-    private TableColumn<?, ?> col_maUngVien;
+    private TableColumn<UngVien, String> col_maUngVien;
 
     @FXML
-    private TableColumn<?, ?> col_hoten;
+    private TableColumn<UngVien, String> col_hoten;
 
 
     @Override

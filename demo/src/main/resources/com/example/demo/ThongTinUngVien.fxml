@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="547.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UngVienController">
    <children>
-      <TableView layoutX="130.0" layoutY="94.0" prefHeight="200.0" prefWidth="504.0">
+      <TableView fx:id="tbl_UngVien" layoutX="130.0" layoutY="94.0" prefHeight="200.0" prefWidth="504.0">
         <columns>
           <TableColumn fx:id="col_maUngVien" prefWidth="69.60003662109375" text="C1" />
           <TableColumn fx:id="col_hoten" prefWidth="80.79997253417969" text="C2" />
