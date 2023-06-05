@@ -1,10 +1,11 @@
 package com.example.demo;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -50,6 +51,29 @@ public class UngVienController implements Initializable {
     @FXML
     private TableColumn<?, ?> col_trinhDoChuyenMon;
 
+    @FXML
+    private Button btn_search;
+    // bang so 2
+    @FXML
+    private TableView<DiemUngVien> tbl_DiemUngVien;
+    @FXML
+    private TableColumn<?, ?> col_maUngVien1;
+    @FXML
+
+    private TableColumn<?, ?> col_hoten1;
+
+    @FXML
+    private TableColumn<?, ?> col_kinhNghiem1;
+
+    @FXML
+    private TableColumn<?, ?> col_bangcap1;
+
+    @FXML
+    private TableColumn<?, ?> col_trinhDoChuyenMon1;
+
+    @FXML
+    private TableColumn<?, ?> col_luong1;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,7 +94,7 @@ public class UngVienController implements Initializable {
                         resultSet.getDate("ngaySinh"),
                         resultSet.getString("queQuan"),
                         resultSet.getString("diaChi"),
-                        resultSet.getString("kinhNghiem"),
+                        resultSet.getInt("kinhNghiem"),
                         resultSet.getString("trinhDoChuyenMon"),
                         resultSet.getString("bangCap"),
                         resultSet.getFloat("luong")
@@ -87,12 +111,63 @@ public class UngVienController implements Initializable {
             col_kinhNghiem.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
             col_trinhDoChuyenMon.setCellValueFactory(new PropertyValueFactory<>("trinhDoChuyenMon"));
             col_bangcap.setCellValueFactory(new PropertyValueFactory<>("bangCap"));
+//            col_bangcap.setCellValueFactory(new PropertyValueFactory<>("diemBangCap"));
             col_luong.setCellValueFactory(new PropertyValueFactory<>("luong"));
 
             tbl_UngVien.setItems(list);
 
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+
+
+    }
+    @FXML
+    void search(ActionEvent event) {
+          ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
+        int inputDiemKinhNghiem =5;
+        int inputDiemBangCap =6;
+        float inputLuong =6000000;
+        int chenhLechTrinhDoChuyenMon;
+        String inputTrinhDoChuyenMon = "css";
+        for (UngVien ungVien : list) {
+           int chenhLechDiemKinhNghiem= inputDiemKinhNghiem - ungVien.getKinhNghiem();
+
+           int chenhLechDiemBangCap= inputDiemBangCap - ungVien.getDiemBangCap();
+            System.out.println(chenhLechDiemBangCap);
+           float chenhLechLuong= inputLuong - ungVien.getLuong();
+            System.out.println(chenhLechLuong);
+
+            if(ungVien.getTrinhDoChuyenMon().toLowerCase().contains(inputTrinhDoChuyenMon.toLowerCase())){
+               chenhLechTrinhDoChuyenMon =1;
+            }else chenhLechTrinhDoChuyenMon=0;
+
+           DiemUngVien duv = new DiemUngVien(ungVien.getMaUngVien(), ungVien.getHoTen(), chenhLechDiemKinhNghiem,chenhLechTrinhDoChuyenMon,
+                   chenhLechDiemBangCap,chenhLechLuong);
+            listDiemUngVien.add(duv);
+
+            // test
+            for (DiemUngVien diemUngVien : listDiemUngVien) {
+                System.out.println("Mã ứng viên: " + diemUngVien.getMaUngVien());
+                System.out.println("Họ và tên: " + diemUngVien.getHoTen());
+                System.out.println("Chênh lệch điểm kinh nghiệm: " + diemUngVien.getKinhNghiem());
+                System.out.println("Thuộc tính 1: " + diemUngVien.getTrinhDoChuyenMon());
+                System.out.println("Chênh lệch điểm bằng cấp: " + diemUngVien.getBangCap());
+                System.out.println("Chênh lệch lương: " + diemUngVien.getLuong());
+                System.out.println("--------------------------------");
+            }
+
+
+            col_maUngVien1.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
+            col_hoten1.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+            col_kinhNghiem1.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
+            col_trinhDoChuyenMon1.setCellValueFactory(new PropertyValueFactory<>("trinhDoChuyenMon"));
+            col_bangcap1.setCellValueFactory(new PropertyValueFactory<>("bangCap"));
+            col_luong1.setCellValueFactory(new PropertyValueFactory<>("luong"));
+            tbl_DiemUngVien.setItems(listDiemUngVien);
+        }
+
     }
 }

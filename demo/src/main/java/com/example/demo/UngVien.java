@@ -9,12 +9,16 @@ public class UngVien {
     public Date ngaySinh;
     public String queQuan;
     public String diaChi;
-    public String kinhNghiem;
+    public int kinhNghiem;
     public String trinhDoChuyenMon;
-    public String bangCap;
+    private String bangCap;
+
+
+
+    private int diemBangCap;
     public float luong;
 
-    public UngVien(String maUngVien, String hoTen, Date ngaySinh, String queQuan, String diaChi, String kinhNghiem, String trinhDoChuyenMon, String bangCap, float luong) {
+    public UngVien(String maUngVien, String hoTen, Date ngaySinh, String queQuan, String diaChi, int kinhNghiem, String trinhDoChuyenMon, String bangCap, float luong) {
         this.maUngVien = maUngVien;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
@@ -24,6 +28,17 @@ public class UngVien {
         this.trinhDoChuyenMon = trinhDoChuyenMon;
         this.bangCap = bangCap;
         this.luong = luong;
+
+        if(bangCap.equalsIgnoreCase("Xuất sắc")) {
+            this.diemBangCap=10;
+        }else if(bangCap.equalsIgnoreCase("Giỏi")){
+            this.diemBangCap=8;
+        }else if(bangCap.equalsIgnoreCase("Khá")){
+            this.diemBangCap=6;
+        }else if(bangCap.equalsIgnoreCase("Trung bình")){
+            this.diemBangCap=4;
+        }
+        System.out.println(diemBangCap);
     }
 
     public Date getNgaySinh() {
@@ -50,11 +65,11 @@ public class UngVien {
         this.diaChi = diaChi;
     }
 
-    public String getKinhNghiem() {
+    public int getKinhNghiem() {
         return kinhNghiem;
     }
 
-    public void setKinhNghiem(String kinhNghiem) {
+    public void setKinhNghiem(int kinhNghiem) {
         this.kinhNghiem = kinhNghiem;
     }
 
@@ -111,5 +126,12 @@ public class UngVien {
         this.ngaySinh = ngaySinh;
     }
 
+    public int getDiemBangCap() {
+        return diemBangCap;
+    }
+
+    public void setDiemBangCap(int diemBangCap) {
+        this.diemBangCap = diemBangCap;
+    }
 
 }
