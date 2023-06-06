@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -74,7 +72,31 @@ public class UngVienController implements Initializable {
     @FXML
     private TableColumn<?, ?> col_luong1;
 
+    // input nguoi dung
+    @FXML
+    private TextField txt_input_NamKN;
 
+    @FXML
+    private TextField txt_input_TrinhDoChuyenMon;
+
+    @FXML
+    private TextField txt_input_Luong;
+
+    @FXML
+    ComboBox<String> cb_input_BangCap;
+
+    public int chuyenDiemBangCap(String bangCap){
+        if(bangCap.equalsIgnoreCase("Xuất sắc")) {
+            return 10;
+        }else if(bangCap.equalsIgnoreCase("Giỏi")){
+            return 8;
+        }else if(bangCap.equalsIgnoreCase("Khá")){
+            return 6;
+        }else if(bangCap.equalsIgnoreCase("Trung bình")){
+            return 4;
+        }
+        return 0;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Thông tin kết nối cơ sở dữ liệu
@@ -121,21 +143,38 @@ public class UngVienController implements Initializable {
             throwables.printStackTrace();
         }
 
+        cb_input_BangCap.getItems().add("Xuất sắc");
+        cb_input_BangCap.getItems().add("Giỏi");
+        cb_input_BangCap.getItems().add("Khá");
+        cb_input_BangCap.getItems().add("Trung bình");
+
+        // set cac gtri mac dinh
+        cb_input_BangCap.setValue("Xuất sắc");
+        txt_input_Luong.setText("5000000");
+        txt_input_NamKN.setText("5");
+        txt_input_TrinhDoChuyenMon.setText("java");
+
 
 
     }
     @FXML
     void search(ActionEvent event) {
-          ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
-        int inputDiemKinhNghiem =5;
-        int inputDiemBangCap =6;
-        float inputLuong =6000000;
-        int chenhLechTrinhDoChuyenMon;
-        String inputTrinhDoChuyenMon = "css";
-        for (UngVien ungVien : list) {
-           int chenhLechDiemKinhNghiem= inputDiemKinhNghiem - ungVien.getKinhNghiem();
+        ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
+        int inputDiemKinhNghiem = Integer.parseInt(txt_input_NamKN.getText());
+        float inputLuong = Integer.parseInt(txt_input_Luong.getText());
+        String inputTrinhDoChuyenMon = txt_input_TrinhDoChuyenMon.getText();
+        int inputDiemBangCap = chuyenDiemBangCap(cb_input_BangCap.getValue().toString());
 
-           int chenhLechDiemBangCap= inputDiemBangCap - ungVien.getDiemBangCap();
+        int chenhLechTrinhDoChuyenMon;
+
+
+        // them lựa chọn cho comboBox
+
+
+        for (UngVien ungVien : list) {
+           int chenhLechDiemKinhNghiem= ungVien.getKinhNghiem() -inputDiemKinhNghiem;
+
+           int chenhLechDiemBangCap= ungVien.getDiemBangCap()-inputDiemBangCap ;
             System.out.println(chenhLechDiemBangCap);
            float chenhLechLuong= inputLuong - ungVien.getLuong();
             System.out.println(chenhLechLuong);
@@ -170,4 +209,6 @@ public class UngVienController implements Initializable {
         }
 
     }
+
+
 }
