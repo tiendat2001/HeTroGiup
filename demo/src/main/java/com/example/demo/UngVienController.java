@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -74,7 +72,31 @@ public class UngVienController implements Initializable {
     @FXML
     private TableColumn<?, ?> col_luong1;
 
+    // input nguoi dung
+    @FXML
+    private TextField txt_input_NamKN;
 
+    @FXML
+    private TextField txt_input_TrinhDoChuyenMon;
+
+    @FXML
+    private TextField txt_input_Luong;
+
+    @FXML
+    ComboBox<String> cb_input_BangCap;
+
+    public int chuyenDiemBangCap(String bangCap){
+        if(bangCap.equalsIgnoreCase("Xuất sắc")) {
+            return 10;
+        }else if(bangCap.equalsIgnoreCase("Giỏi")){
+            return 8;
+        }else if(bangCap.equalsIgnoreCase("Khá")){
+            return 6;
+        }else if(bangCap.equalsIgnoreCase("Trung bình")){
+            return 4;
+        }
+        return 0;
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Thông tin kết nối cơ sở dữ liệu
@@ -121,25 +143,39 @@ public class UngVienController implements Initializable {
             throwables.printStackTrace();
         }
 
+        // combo box input
+        cb_input_BangCap.getItems().add("Xuất sắc");
+        cb_input_BangCap.getItems().add("Giỏi");
+        cb_input_BangCap.getItems().add("Khá");
+        cb_input_BangCap.getItems().add("Trung bình");
+
+        // set cac gtri mac dinh
+        cb_input_BangCap.setValue("Xuất sắc");
+        txt_input_Luong.setText("5000000");
+        txt_input_NamKN.setText("5");
+        txt_input_TrinhDoChuyenMon.setText("java");
+
 
 
     }
     @FXML
     void search(ActionEvent event) {
-          ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
-        int inputDiemKinhNghiem =5;
-        int inputDiemBangCap =6;
-        float inputLuong =6000000;
+        ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
+        // lay cac truong input nguoi dung nhap vao
+        int inputDiemKinhNghiem = Integer.parseInt(txt_input_NamKN.getText());
+        float inputLuong = Integer.parseInt(txt_input_Luong.getText());
+        String inputTrinhDoChuyenMon = txt_input_TrinhDoChuyenMon.getText();
+        int inputDiemBangCap = chuyenDiemBangCap(cb_input_BangCap.getValue().toString());
+
         int chenhLechTrinhDoChuyenMon;
-        String inputTrinhDoChuyenMon = "css";
+
+        // tinh toan
         for (UngVien ungVien : list) {
-           int chenhLechDiemKinhNghiem= inputDiemKinhNghiem - ungVien.getKinhNghiem();
+           int chenhLechDiemKinhNghiem= ungVien.getKinhNghiem() -inputDiemKinhNghiem;
+           int chenhLechDiemBangCap= ungVien.getDiemBangCap()-inputDiemBangCap ;
+           float chenhLechLuong= ungVien.getLuong()- inputLuong;
 
-           int chenhLechDiemBangCap= inputDiemBangCap - ungVien.getDiemBangCap();
-            System.out.println(chenhLechDiemBangCap);
-           float chenhLechLuong= inputLuong - ungVien.getLuong();
-            System.out.println(chenhLechLuong);
-
+            // tinh diem chuyen mon neu co +1
             if(ungVien.getTrinhDoChuyenMon().toLowerCase().contains(inputTrinhDoChuyenMon.toLowerCase())){
                chenhLechTrinhDoChuyenMon =1;
             }else chenhLechTrinhDoChuyenMon=0;
@@ -148,18 +184,18 @@ public class UngVienController implements Initializable {
                    chenhLechDiemBangCap,chenhLechLuong);
             listDiemUngVien.add(duv);
 
-            // test
-            for (DiemUngVien diemUngVien : listDiemUngVien) {
-                System.out.println("Mã ứng viên: " + diemUngVien.getMaUngVien());
-                System.out.println("Họ và tên: " + diemUngVien.getHoTen());
-                System.out.println("Chênh lệch điểm kinh nghiệm: " + diemUngVien.getKinhNghiem());
-                System.out.println("Thuộc tính 1: " + diemUngVien.getTrinhDoChuyenMon());
-                System.out.println("Chênh lệch điểm bằng cấp: " + diemUngVien.getBangCap());
-                System.out.println("Chênh lệch lương: " + diemUngVien.getLuong());
-                System.out.println("--------------------------------");
-            }
+//            // test
+//            for (DiemUngVien diemUngVien : listDiemUngVien) {
+//                System.out.println("Mã ứng viên: " + diemUngVien.getMaUngVien());
+//                System.out.println("Họ và tên: " + diemUngVien.getHoTen());
+//                System.out.println("Chênh lệch điểm kinh nghiệm: " + diemUngVien.getKinhNghiem());
+//                System.out.println("Thuộc tính 1: " + diemUngVien.getTrinhDoChuyenMon());
+//                System.out.println("Chênh lệch điểm bằng cấp: " + diemUngVien.getBangCap());
+//                System.out.println("Chênh lệch lương: " + diemUngVien.getLuong());
+//                System.out.println("--------------------------------");
+//            }
 
-
+            // hien thi len bang
             col_maUngVien1.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
             col_hoten1.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
             col_kinhNghiem1.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
@@ -170,4 +206,6 @@ public class UngVienController implements Initializable {
         }
 
     }
+
+
 }
