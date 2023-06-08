@@ -8,29 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="675.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UngVienController">
+<AnchorPane prefHeight="675.0" prefWidth="1039.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UngVienController">
    <children>
-      <TableView fx:id="tbl_UngVien" layoutX="11.0" layoutY="149.0" prefHeight="200.0" prefWidth="963.0">
+      <TableView fx:id="tbl_UngVien" layoutX="11.0" layoutY="149.0" prefHeight="200.0" prefWidth="1017.0">
         <columns>
           <TableColumn fx:id="col_maUngVien" prefWidth="80.00003051757812" text="Mã ứng viên" />
           <TableColumn fx:id="col_hoten" prefWidth="99.19998168945312" text="Họ và tên" />
             <TableColumn fx:id="col_ngaySinh" prefWidth="78.4000244140625" text="Ngày sinh" />
             <TableColumn fx:id="col_quequan" prefWidth="61.60003662109375" text="Quê quán" />
-            <TableColumn fx:id="col_diachi" prefWidth="224.00003051757812" text="Địa chỉ" />
-            <TableColumn fx:id="col_kinhNghiem" prefWidth="116.800048828125" text="Năm kinh nghiệm" />
+            <TableColumn fx:id="col_diachi" prefWidth="205.5999755859375" text="Địa chỉ" />
+            <TableColumn fx:id="col_kinhNghiem" prefWidth="136.79998779296875" text="Năm kinh nghiệm" />
             <TableColumn fx:id="col_trinhDoChuyenMon" prefWidth="131.20001220703125" text="Trình độ chuyên môn" />
             <TableColumn fx:id="col_bangcap" minWidth="0.0" prefWidth="96.0001220703125" text="Bằng cấp" />
-            <TableColumn fx:id="col_luong" minWidth="0.0" prefWidth="74.4000244140625" text="Lương" />
+            <TableColumn fx:id="col_luong" minWidth="0.0" prefWidth="123.2000732421875" text="Lương mong muốn" />
         </columns>
       </TableView>
       <TableView fx:id="tbl_DiemUngVien" layoutX="112.0" layoutY="419.0" prefHeight="200.0" prefWidth="802.0">
          <columns>
             <TableColumn fx:id="col_maUngVien1" prefWidth="84.00000190734863" text="Mã ứng viên" />
-            <TableColumn fx:id="col_hoten1" prefWidth="199.20000457763672" text="Họ tên" />
-            <TableColumn fx:id="col_kinhNghiem1" prefWidth="172.79998779296875" text="Kinh nghiệm" />
-            <TableColumn fx:id="col_trinhDoChuyenMon1" minWidth="0.0" prefWidth="103.99993896484375" text="trình độ" />
-            <TableColumn fx:id="col_bangcap1" prefWidth="96.0" text="bằng cấp" />
-            <TableColumn fx:id="col_luong1" prefWidth="142.39990234375" text="lương" />
+            <TableColumn fx:id="col_hoten1" prefWidth="199.20000457763672" text="Họ và tên" />
+            <TableColumn fx:id="col_kinhNghiem1" prefWidth="172.79998779296875" text="Năm kinh nghiệm" />
+            <TableColumn fx:id="col_trinhDoChuyenMon1" minWidth="0.0" prefWidth="103.99993896484375" text="Trình độ" />
+            <TableColumn fx:id="col_bangcap1" prefWidth="96.0" text="Bằng cấp" />
+            <TableColumn fx:id="col_luong1" prefWidth="142.39990234375" text="Lương" />
          </columns>
       </TableView>
       <Button fx:id="btn_search" layoutX="33.0" layoutY="113.0" mnemonicParsing="false" onAction="#search" text="Tính" />

@@ -143,6 +143,7 @@ public class UngVienController implements Initializable {
             throwables.printStackTrace();
         }
 
+        // combo box input
         cb_input_BangCap.getItems().add("Xuất sắc");
         cb_input_BangCap.getItems().add("Giỏi");
         cb_input_BangCap.getItems().add("Khá");
@@ -160,6 +161,7 @@ public class UngVienController implements Initializable {
     @FXML
     void search(ActionEvent event) {
         ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
+        // lay cac truong input nguoi dung nhap vao
         int inputDiemKinhNghiem = Integer.parseInt(txt_input_NamKN.getText());
         float inputLuong = Integer.parseInt(txt_input_Luong.getText());
         String inputTrinhDoChuyenMon = txt_input_TrinhDoChuyenMon.getText();
@@ -167,18 +169,13 @@ public class UngVienController implements Initializable {
 
         int chenhLechTrinhDoChuyenMon;
 
-
-        // them lựa chọn cho comboBox
-
-
+        // tinh toan
         for (UngVien ungVien : list) {
            int chenhLechDiemKinhNghiem= ungVien.getKinhNghiem() -inputDiemKinhNghiem;
-
            int chenhLechDiemBangCap= ungVien.getDiemBangCap()-inputDiemBangCap ;
-            System.out.println(chenhLechDiemBangCap);
-           float chenhLechLuong= inputLuong - ungVien.getLuong();
-            System.out.println(chenhLechLuong);
+           float chenhLechLuong= ungVien.getLuong()- inputLuong;
 
+            // tinh diem chuyen mon neu co +1
             if(ungVien.getTrinhDoChuyenMon().toLowerCase().contains(inputTrinhDoChuyenMon.toLowerCase())){
                chenhLechTrinhDoChuyenMon =1;
             }else chenhLechTrinhDoChuyenMon=0;
@@ -187,18 +184,18 @@ public class UngVienController implements Initializable {
                    chenhLechDiemBangCap,chenhLechLuong);
             listDiemUngVien.add(duv);
 
-            // test
-            for (DiemUngVien diemUngVien : listDiemUngVien) {
-                System.out.println("Mã ứng viên: " + diemUngVien.getMaUngVien());
-                System.out.println("Họ và tên: " + diemUngVien.getHoTen());
-                System.out.println("Chênh lệch điểm kinh nghiệm: " + diemUngVien.getKinhNghiem());
-                System.out.println("Thuộc tính 1: " + diemUngVien.getTrinhDoChuyenMon());
-                System.out.println("Chênh lệch điểm bằng cấp: " + diemUngVien.getBangCap());
-                System.out.println("Chênh lệch lương: " + diemUngVien.getLuong());
-                System.out.println("--------------------------------");
-            }
+//            // test
+//            for (DiemUngVien diemUngVien : listDiemUngVien) {
+//                System.out.println("Mã ứng viên: " + diemUngVien.getMaUngVien());
+//                System.out.println("Họ và tên: " + diemUngVien.getHoTen());
+//                System.out.println("Chênh lệch điểm kinh nghiệm: " + diemUngVien.getKinhNghiem());
+//                System.out.println("Thuộc tính 1: " + diemUngVien.getTrinhDoChuyenMon());
+//                System.out.println("Chênh lệch điểm bằng cấp: " + diemUngVien.getBangCap());
+//                System.out.println("Chênh lệch lương: " + diemUngVien.getLuong());
+//                System.out.println("--------------------------------");
+//            }
 
-
+            // hien thi len bang
             col_maUngVien1.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
             col_hoten1.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
             col_kinhNghiem1.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
