@@ -3,10 +3,29 @@ package com.example.demo;
 public class DiemUngVien {
     public String maUngVien;
     public String hoTen;
-    public int kinhNghiem;
-    public int trinhDoChuyenMon;
-    public int bangCap;
-    public float luong;
+    public double kinhNghiem;
+    public double trinhDoChuyenMon;
+    public double bangCap;
+    public double luong;
+
+    public double diemPhuHop;
+
+    public double getDiemPhuHop() {
+        return diemPhuHop;
+    }
+
+    public void setDiemPhuHop(double diemPhuHop) {
+        this.diemPhuHop = diemPhuHop;
+    }
+
+    public DiemUngVien(String maUngVien, String hoTen, double kinhNghiem, double trinhDoChuyenMon, double bangCap, double luong) {
+        this.maUngVien = maUngVien;
+        this.hoTen = hoTen;
+        this.kinhNghiem = kinhNghiem;
+        this.trinhDoChuyenMon = trinhDoChuyenMon;
+        this.bangCap = bangCap;
+        this.luong = luong;
+    }
 
     public String getMaUngVien() {
         return maUngVien;
@@ -24,48 +43,35 @@ public class DiemUngVien {
         this.hoTen = hoTen;
     }
 
-    public int getKinhNghiem() {
+    public double getKinhNghiem() {
         return kinhNghiem;
     }
 
-    public void setKinhNghiem(int kinhNghiem) {
+    public void setKinhNghiem(double kinhNghiem) {
         this.kinhNghiem = kinhNghiem;
     }
 
-    public int getTrinhDoChuyenMon() {
+    public double getTrinhDoChuyenMon() {
         return trinhDoChuyenMon;
     }
 
-    public void setTrinhDoChuyenMon(int trinhDoChuyenMon) {
+    public void setTrinhDoChuyenMon(double trinhDoChuyenMon) {
         this.trinhDoChuyenMon = trinhDoChuyenMon;
     }
 
-    public int getBangCap() {
+    public double getBangCap() {
         return bangCap;
     }
 
-    public void setBangCap(int bangCap) {
+    public void setBangCap(double bangCap) {
         this.bangCap = bangCap;
     }
 
-    public float getLuong() {
+    public double getLuong() {
         return luong;
     }
 
-    public void setLuong(int luong) {
-        this.luong = luong;
-    }
-
-    public void setLuong(float luong) {
-        this.luong = luong;
-    }
-
-    public DiemUngVien(String maUngVien, String hoTen, int kinhNghiem, int trinhDoChuyenMon, int bangCap, float luong) {
-        this.maUngVien = maUngVien;
-        this.hoTen = hoTen;
-        this.kinhNghiem = kinhNghiem;
-        this.trinhDoChuyenMon = trinhDoChuyenMon;
-        this.bangCap = bangCap;
+    public void setLuong(double luong) {
         this.luong = luong;
     }
 }
