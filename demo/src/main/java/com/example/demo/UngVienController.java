@@ -90,6 +90,10 @@ public class UngVienController implements Initializable {
     @FXML
     ComboBox<String> cb_input_BangCap;
 
+    @FXML
+    private Button btn_reload;
+
+
     public int chuyenDiemBangCap(String bangCap){
         if(bangCap.equalsIgnoreCase("Xuất sắc")) {
             return 10;
@@ -162,10 +166,60 @@ public class UngVienController implements Initializable {
 
 
     }
+    @FXML void reload(ActionEvent event){
+        list.clear();
+        String urlDB = "jdbc:mysql://localhost:3306/hetrogiup";
+        String username = "root";
+        String password = "";
+
+        try {
+            Connection conn = DriverManager.getConnection(urlDB, username, password);
+            String sql = "Select * from ungvien ";
+            Statement Statement = conn.createStatement();
+            ResultSet resultSet = Statement.executeQuery(sql);
+            while (resultSet.next()) {
+                list.add(new UngVien(
+                        resultSet.getString("maUngVien"),
+                        resultSet.getString("hoTen"),
+                        resultSet.getDate("ngaySinh"),
+                        resultSet.getString("queQuan"),
+                        resultSet.getString("diaChi"),
+                        resultSet.getInt("kinhNghiem"),
+                        resultSet.getString("trinhDoChuyenMon"),
+                        resultSet.getString("bangCap"),
+                        resultSet.getFloat("luong")
+
+                ));
+
+            }
+
+            col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
+            col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+            col_ngaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+            col_quequan.setCellValueFactory(new PropertyValueFactory<>("queQuan"));
+            col_diachi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+            col_kinhNghiem.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
+            col_trinhDoChuyenMon.setCellValueFactory(new PropertyValueFactory<>("trinhDoChuyenMon"));
+            col_bangcap.setCellValueFactory(new PropertyValueFactory<>("bangCap"));
+//            col_bangcap.setCellValueFactory(new PropertyValueFactory<>("diemBangCap"));
+            col_luong.setCellValueFactory(new PropertyValueFactory<>("luong"));
+            tbl_UngVien.setItems(list);
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        tbl_DiemUngVien.getItems().clear();
+
+
+    }
+
     @FXML
     void search(ActionEvent event) {
         ObservableList<DiemUngVien> listDiemUngVien = FXCollections.observableArrayList();
         ObservableList<DiemUngVien> listDiemUngVienChuanHoa = FXCollections.observableArrayList();
+        ObservableList<UngVien> listKetQua = FXCollections.observableArrayList();
 
         // lay cac truong input nguoi dung nhap vao
         int inputDiemKinhNghiem = Integer.parseInt(txt_input_NamKN.getText());
@@ -211,7 +265,7 @@ public class UngVienController implements Initializable {
                     return Double.compare(duv1.getDiemPhuHop(), duv2.getDiemPhuHop());
                 }
             });
-            // hien thi len bang
+            // hien thi len bang duoi
             col_maUngVien1.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
             col_hoten1.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
             col_kinhNghiem1.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
@@ -223,10 +277,61 @@ public class UngVienController implements Initializable {
             tbl_DiemUngVien.setItems(listDiemUngVienChuanHoa);
         }
 
+        String urlDB = "jdbc:mysql://localhost:3306/hetrogiup";
+        String username = "root";
+        String password = "";
+
+        try {
+            Connection conn = DriverManager.getConnection(urlDB, username, password);
+            Statement Statement = conn.createStatement();
+
+            for (DiemUngVien diemUngVien : listDiemUngVienChuanHoa) {
+                String sql = "Select * from ungvien where maUngVien= "+diemUngVien.getMaUngVien();
+                ResultSet resultSet = Statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    listKetQua.add(new UngVien(
+                            resultSet.getString("maUngVien"),
+                            resultSet.getString("hoTen"),
+                            resultSet.getDate("ngaySinh"),
+                            resultSet.getString("queQuan"),
+                            resultSet.getString("diaChi"),
+                            resultSet.getInt("kinhNghiem"),
+                            resultSet.getString("trinhDoChuyenMon"),
+                            resultSet.getString("bangCap"),
+                            resultSet.getFloat("luong")
+
+                    ));
+
+                }
+
+
+            }
+
+
+
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        col_maUngVien.setCellValueFactory(new PropertyValueFactory<>("maUngVien"));
+        col_hoten.setCellValueFactory(new PropertyValueFactory<>("hoTen"));
+        col_ngaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+        col_quequan.setCellValueFactory(new PropertyValueFactory<>("queQuan"));
+        col_diachi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+        col_kinhNghiem.setCellValueFactory(new PropertyValueFactory<>("kinhNghiem"));
+        col_trinhDoChuyenMon.setCellValueFactory(new PropertyValueFactory<>("trinhDoChuyenMon"));
+        col_bangcap.setCellValueFactory(new PropertyValueFactory<>("bangCap"));
+//            col_bangcap.setCellValueFactory(new PropertyValueFactory<>("diemBangCap"));
+        col_luong.setCellValueFactory(new PropertyValueFactory<>("luong"));
+        tbl_UngVien.setItems(listKetQua);
 
 
 
     }
+
 
     public float tinhDoPhuHopKinhNghiem(int kinhNghiemUngVien, int kinhNghiemYeuCau) {
         int chenhLechSoNam= kinhNghiemUngVien -kinhNghiemYeuCau;
@@ -307,8 +412,8 @@ public class UngVienController implements Initializable {
 
 
         // tinh A*
-        double maxDiemKinhNghiem=0;
-        double maxDiemTrinhDo=0;
+        double maxDiemKinhNghiem=0;  //0.3
+        double maxDiemTrinhDo=0; //0.4
         double maxDiemBangCap=0;
         double maxLuong=0;
 

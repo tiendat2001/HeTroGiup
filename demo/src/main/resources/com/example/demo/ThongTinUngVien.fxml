@@ -23,7 +23,7 @@
             <TableColumn fx:id="col_luong" minWidth="0.0" prefWidth="123.2000732421875" text="Lương mong muốn" />
         </columns>
       </TableView>
-      <TableView fx:id="tbl_DiemUngVien" layoutX="80.0" layoutY="419.0" prefHeight="200.0" prefWidth="934.0">
+      <TableView fx:id="tbl_DiemUngVien" layoutX="9.0" layoutY="419.0" prefHeight="200.0" prefWidth="1005.0">
          <columns>
             <TableColumn fx:id="col_maUngVien1" prefWidth="84.00000190734863" text="Mã ứng viên" />
             <TableColumn fx:id="col_hoten1" prefWidth="199.20000457763672" text="Họ và tên" />
@@ -31,10 +31,10 @@
             <TableColumn fx:id="col_trinhDoChuyenMon1" minWidth="0.0" prefWidth="103.99993896484375" text="Phù hợp trình độ" />
             <TableColumn fx:id="col_bangcap1" prefWidth="111.20001220703125" text="Phù hợp bằng cấp" />
             <TableColumn fx:id="col_luong1" prefWidth="127.199951171875" text="Phù hợp lương" />
-            <TableColumn fx:id="col_doPhuHop" prefWidth="127.199951171875" text="Độ phù hợp" />
+            <TableColumn fx:id="col_doPhuHop" prefWidth="203.2000732421875" text="Độ phù hợp" />
          </columns>
       </TableView>
-      <Button fx:id="btn_search" layoutX="33.0" layoutY="113.0" mnemonicParsing="false" onAction="#search" text="Tính" />
+      <Button fx:id="btn_search" layoutX="27.0" layoutY="110.0" mnemonicParsing="false" onAction="#search" text="Tìm kiếm" />
       <TextField fx:id="txt_input_NamKN" layoutX="137.0" layoutY="47.0" />
       <Text layoutX="33.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Năm kinh nghiệm" />
       <TextField fx:id="txt_input_Luong" layoutX="137.0" layoutY="77.0" />
@@ -43,5 +43,6 @@
       <Text layoutX="315.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bằng cấp" />
       <Text layoutX="315.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trình độ chuyên môn" />
       <ComboBox fx:id="cb_input_BangCap" layoutX="438.0" layoutY="47.0" prefWidth="150.0" />
+      <Button fx:id="btn_reload" layoutX="104.0" layoutY="110.0" mnemonicParsing="false" onAction="#reload" text="Tải lại" />
    </children>
 </AnchorPane>
